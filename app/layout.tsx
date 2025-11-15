@@ -17,12 +17,12 @@ export function HeadSchema() {
         "@type": "Person",
         "name": "Thibault Falézan",
         "jobTitle": "Étudiant en informatique",
-        "url": "https://thibaultfalezan.com",
+        "url": "https://portfolio.thibaultfalezan.com",
         "sameAs": [
           "https://github.com/Thibault0712",
           "https://www.linkedin.com/in/thibaultfalezan"
         ],
-        "image": "https://thibaultfalezan.com/img/profilePicture.png",
+        "image": "https://portfolio.thibaultfalezan.com/img/profilePicture.png",
         "alumniOf": {
           "@type": "CollegeOrUniversity",
           "name": "IUT de Vannes"
@@ -46,7 +46,7 @@ export function HeadSchema() {
           }
         ],
         "knowsAbout": ["ReactJS", "TypeScript", "Kotlin", "Spring Boot", "Java", "Arduino", "SQL", "Docker", "Git"],
-        "mainEntityOfPage": "https://thibaultfalezan.com"
+        "mainEntityOfPage": "https://portfolio.thibaultfalezan.com"
       }
       `}
         </Script>

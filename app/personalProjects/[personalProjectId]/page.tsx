@@ -27,7 +27,7 @@ export async function generateMetadata(
         openGraph: {
             title: projectInfo.projectName,
             description: projectInfo.description,
-            url: `https://thibaultfalezan.fr/personalProjects/${personalProjectId}`,
+            url: `https://portfolio.thibaultfalezan.com/personalProjects/${personalProjectId}`,
             type: "article",
             images: [
                 {
@@ -39,7 +39,7 @@ export async function generateMetadata(
         },
 
         alternates: {
-            canonical: `https://thibaultfalezan.fr/personalProjects/${personalProjectId}`,
+            canonical: `https://portfolio.thibaultfalezan.fr/personalProjects/${personalProjectId}`,
         },
     };
 }
@@ -67,11 +67,11 @@ export default async function Page({ params }: { params: Promise<{ personalProje
                         name: projectInfo.projectName,
                         description: projectInfo.description,
                         image: projectInfo.imageLink,
-                        url: `https://thibaultfalezan.com/projets/${personalProjectId}`,
+                        url: `https://portfolio.thibaultfalezan.com/projets/${personalProjectId}`,
                         author: {
                             "@type": "Person",
                             name: "Thibault Falézan",
-                            url: "https://thibaultfalezan.com"
+                            url: "https://portfolio.thibaultfalezan.com"
                         },
                         dateCreated: projectInfo.projectName,
                         genre: "Projet informatique / Portfolio",

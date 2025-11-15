@@ -4,7 +4,7 @@ export default function robots() {
             userAgent: "*",
             allow: "/",
         },
-        sitemap: "https://thibaultfalezan.com/sitemap.xml",
-        host: "https://thibaultfalezan.com"
+        sitemap: "https://portfolio.thibaultfalezan.com/sitemap.xml",
+        host: "https://portfolio.thibaultfalezan.com"
     };
 }

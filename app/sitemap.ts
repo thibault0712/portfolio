@@ -2,7 +2,7 @@ import fetchProjectList from "@/src/fetch/fetchProjectList";
 import {PersonalProjectType} from "@/src/types/PersonalProjectType";
 
 export default async function sitemap() {
-    const baseUrl = "https://thibaultfalezan.com";
+    const baseUrl = "https://portfolio.thibaultfalezan.com";
 
     const routes = ["", "/#a-propos", "/#mes-experiences", "/#mes-projets"].map((route) => ({
         url: `${baseUrl}${route}`,
