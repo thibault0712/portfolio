@@ -21,6 +21,7 @@ async function fetchProjectList() {
         response.documents.forEach(document => {
             const personalProject: PersonalProjectType = {
                 $id: document.$id,
+                $updatedAt: new Date(document.$updatedAt),
                 codeLink: document.codeLink,
                 demoLink: document.demoLink,
                 description: document.description,
