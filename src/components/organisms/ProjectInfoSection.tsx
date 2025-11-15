@@ -2,16 +2,8 @@
 
 import {PersonalProjectType} from "@/src/types/PersonalProjectType";
 import ImageCard from "@/src/components/atoms/ImageCard";
-import Markdown from "react-markdown";
-import {ComponentPropsWithoutRef} from "react";
-import Link from "next/link";
-import {Card, CardContent} from "@/components/ui/card";
-import Image from "next/image";
 import {Button} from "@/components/ui/button";
 import {FaExternalLinkAlt, FaGithub} from "react-icons/fa";
-import {Badge} from "@/components/ui/badge";
-import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
 import TagsList from "@/src/components/molecules/TagsList";
 import MarkdownConversion from "@/src/components/atoms/MarkdownConversion";
 

@@ -61,7 +61,8 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
-        <HeadSchema />
+          <title>Falézan Thibault</title>
+            <HeadSchema />
       </head>
       <body>
         {children}
