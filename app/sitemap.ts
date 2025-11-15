@@ -18,15 +18,7 @@ export default async function sitemap() {
         lastModified: new Date(),
         priority: 0.8,
         updatedAt: new Date(project.$updatedAt),
-        images: project.imageLink
-            ? [
-                {
-                    loc: project.imageLink,
-                    title: project.projectName,
-                    caption: project.description?.slice(0, 200),
-                },
-            ]
-            : [],
+        images: project.imageLink ? [project.imageLink.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")] : [],
     }));
 
     return [...routes, ...projectRoutes];
