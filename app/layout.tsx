@@ -29,7 +29,7 @@ export function HeadSchema() {
         },
         "worksFor": {
           "@type": "Organization",
-          "name": "BIC - BJ75",
+          "name": "BIC - BJ75"
         },
         "hasOccupation": [
           {
