@@ -16,7 +16,7 @@ const ProfileImageCard = () => {
                     width={350}
                     height={450}
                     className="w-full h-auto"
-                    src="/img/profilePicture.png"
+                    src="/img/profilePicture.webp"
                     alt="Illustration Thibault Falézan"
                     priority
                     fetchPriority="high"
