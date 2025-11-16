@@ -18,6 +18,8 @@ const ProfileImageCard = () => {
                     className="w-full h-auto"
                     src="/img/profilePicture.png"
                     alt="Illustration Thibault Falézan"
+                    priority
+                    fetchPriority="high"
                 />
             </div>
         </motion.div>
