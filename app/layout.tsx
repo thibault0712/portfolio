@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 
 export function HeadSchema() {
     return (
+        <>
         <Script id="person-schema" type="application/ld+json">
             {`
       {
@@ -50,6 +51,20 @@ export function HeadSchema() {
       }
       `}
         </Script>
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-ZNSY0F65R6"></Script>
+        <Script
+            id="google-analytics"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+                __html: `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', 'G-ZNSY0F65R6');
+                `,
+            }}
+        />
+    </>
     );
 }
 
