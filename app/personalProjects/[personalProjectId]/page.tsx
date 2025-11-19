@@ -58,6 +58,10 @@ export default async function Page({ params }: { params: Promise<{ personalProje
         <>
             <Header navTitle={"Mes projets"} navLink={"/#mes-projets"}/>
 
+            <head>
+                <title>{`${projectInfo.projectName} – Mes projets`}</title>
+            </head>
+
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{

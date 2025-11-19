@@ -1,88 +1,96 @@
-import type { Metadata } from "next";
-import "@/src/assets/styles/globals.css";
 import Footer from "@/src/components/organisms/Footer";
 import Script from "next/script";
+import "@/src/assets/styles/globals.css";
+import React from "react";
 
-export const metadata: Metadata = {
-    title: "Falézan Thibault",
-    description: "Portfolio de Thibault Falézan, étudiant en informatique à l’IUT de Vannes et alternant chez BJ75 BIC. Découvrez ses projets web, plugins, expériences et compétences techniques."
+export const metadata = {
+    title: "Portfolio - Falézan Thibault",
+    description:
+        "Portfolio de Thibault Falézan, étudiant en informatique à l’IUT de Vannes et alternant chez BJ75 BIC. Découvrez ses projets web, plugins, expériences et compétences techniques.",
+
+    // Favicon
+    icons: {
+        icon: "/icon.png",
+    },
+
+    // Open Graph
+    openGraph: {
+        title: "Falézan Thibault",
+        description:
+            "Portfolio de Thibault Falézan, étudiant en informatique à l’IUT de Vannes et alternant chez BJ75 BIC. Découvrez ses projets web, plugins, expériences et compétences techniques.",
+        url: "https://portfolio.thibaultfalezan.com",
+        type: "website",
+        images: [
+            {
+                url: "https://portfolio.thibaultfalezan.com/img/profilePicture.webp",
+                width: 800,
+                height: 800,
+                alt: "Photo de Thibault Falézan",
+            },
+        ],
+    },
+
+    // Twitter Card
+    twitter: {
+        card: "summary_large_image",
+        title: "Falézan Thibault",
+        description:
+            "Portfolio de Thibault Falézan, étudiant en informatique à l’IUT de Vannes et alternant chez BJ75 BIC. Découvrez ses projets web, plugins, expériences et compétences techniques.",
+        images: ["https://portfolio.thibaultfalezan.com/img/profilePicture.webp"],
+    },
 };
 
-export function HeadSchema() {
-    return (
-        <>
-        <Script id="person-schema" type="application/ld+json">
-            {`
-      {
+export default function RootLayout({
+                                       children,
+                                   }: {
+    children: React.ReactNode;
+}) {
+    const jsonLd = {
         "@context": "https://schema.org",
         "@type": "Person",
-        "name": "Thibault Falézan",
-        "jobTitle": "Étudiant en informatique",
-        "url": "https://portfolio.thibaultfalezan.com",
-        "sameAs": [
-          "https://github.com/Thibault0712",
-          "https://www.linkedin.com/in/thibaultfalezan"
+        name: "Thibault Falézan",
+        jobTitle: "Étudiant en informatique",
+        url: "https://portfolio.thibaultfalezan.com",
+        image: "https://portfolio.thibaultfalezan.com/img/profilePicture.webp",
+        sameAs: [
+            "https://github.com/Thibault0712",
+            "https://www.linkedin.com/in/thibaultfalezan",
         ],
-        "image": "https://portfolio.thibaultfalezan.com/img/profilePicture.png",
-        "alumniOf": {
-          "@type": "CollegeOrUniversity",
-          "name": "IUT de Vannes"
-        },
-        "worksFor": {
-          "@type": "Organization",
-          "name": "BIC - BJ75"
-        },
-        "hasOccupation": [
-          {
-            "@type": "Occupation",
-            "name": "Alternance en développement logiciel",
-            "description": "Développement de projets front-end et back-end, intégration Kotlin / Spring Boot et ReactJS",
-            "startDate": "2025-10-20"
-          },
-          {
-            "@type": "Occupation",
-            "name": "Étudiant en informatique",
-            "description": "Réalisation de projets web et applications Java, apprentissage des bonnes pratiques et travail collaboratif",
-            "startDate": "2024-09-01"
-          }
-        ],
-        "knowsAbout": ["ReactJS", "TypeScript", "Kotlin", "Spring Boot", "Java", "Arduino", "SQL", "Docker", "Git"],
-        "mainEntityOfPage": "https://portfolio.thibaultfalezan.com"
-      }
-      `}
-        </Script>
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-ZNSY0F65R6"></Script>
-        <Script
-            id="google-analytics"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-                __html: `
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', 'G-ZNSY0F65R6');
-                `,
-            }}
-        />
-    </>
-    );
-}
+    };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="fr">
-      <head>
-          <title>Falézan Thibault</title>
-            <HeadSchema />
-      </head>
-      <body>
+    return (
+        <html lang="fr">
+        <head>
+            <title>Portfolio - Falézan Thibault</title>
+
+            {/* JSON-LD Schema (Schéma de données structurées) */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
+
+            {/* Google Analytics - Utilise next/script pour une gestion optimisée */}
+            <Script
+                async
+                src="https://www.googletagmanager.com/gtag/js?id=G-ZNSY0F65R6"
+            ></Script>
+            <Script
+                id="google-analytics"
+                strategy="afterInteractive"
+                dangerouslySetInnerHTML={{
+                    __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-ZNSY0F65R6');
+            `,
+                }}
+            />
+        </head>
+        <body>
         {children}
         <Footer />
-      </body>
-    </html>
-  );
+        </body>
+        </html>
+    );
 }
