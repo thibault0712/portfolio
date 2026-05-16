@@ -55,22 +55,22 @@ const Header = (headerProps: HeaderProps) => {
                     <div className="flex items-center space-x-8">
 
                         <div className="flex text-lg invisible w-0 sm:w-auto sm:visible space-x-8">
-                            <Link href="#accueil" className="relative group transition duration-300">
+                            <Link href="/#accueil" className="relative group transition duration-300">
                                 Accueil
                                 <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-current transition-all duration-300 group-hover:w-full"></span>
                             </Link>
 
-                            <Link href="#a-propos" className="relative group transition duration-300">
+                            <Link href="/#a-propos" className="relative group transition duration-300">
                                 À propos
                                 <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-current transition-all duration-300 group-hover:w-full"></span>
                             </Link>
 
-                            <Link href="#mes-experiences" className="relative group transition duration-300">
+                            <Link href="/#mes-experiences" className="relative group transition duration-300">
                                 Mes expériences
                                 <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-current transition-all duration-300 group-hover:w-full"></span>
                             </Link>
 
-                            <Link href="#mes-projets" className="relative group transition duration-300">
+                            <Link href="/#mes-projets" className="relative group transition duration-300">
                                 Mes projets
                                 <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-current transition-all duration-300 group-hover:w-full"></span>
                             </Link>
