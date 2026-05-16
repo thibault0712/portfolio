@@ -8,7 +8,7 @@ type ImageCardProps = {
 const ImageCard = (imageCardProps: ImageCardProps) => {
     return (
         <div className="w-full relative overflow-hidden rounded-base shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none cursor-default">
-            <Image width={250} height={200} className={"w-full rounded-xl max-h-50 sm:max-h-96 object-cover "} src={imageCardProps.imageLink} alt={imageCardProps.projectTitle}></Image>
+            <Image unoptimized={true} width={250} height={200} className={"w-full rounded-xl max-h-50 sm:max-h-96 object-cover "} src={imageCardProps.imageLink} alt={imageCardProps.projectTitle}></Image>
 
             <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px] flex items-center justify-center">
 

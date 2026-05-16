@@ -34,7 +34,7 @@ const ProjectCard = (cardProps: CardProps) => {
             <Card className="pt-6 h-full hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none cursor-pointer" onClick={() => window.open("/personalProjects/" + cardProps.projectId)}>
                 <CardContent className={"space-y-4 px-6 flex flex-col grow"}>
 
-                    <Image width={250} height={200} className={"rounded-base w-full h-54 object-cover shadow-shadow border-2 border-black hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none"} src={cardProps.imageLink} alt={`Screenshot du projet ${cardProps.title}`}></Image>
+                    <Image unoptimized={true} width={250} height={200} className={"rounded-base w-full h-54 object-cover shadow-shadow border-2 border-black hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none"} src={cardProps.imageLink} alt={`Screenshot du projet ${cardProps.title}`}></Image>
 
                     <Title textLevel={"h3"} className="text-xl font-heading">{cardProps.title}</Title>
 
