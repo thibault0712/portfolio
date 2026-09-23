@@ -1,0 +1,52 @@
+services:
+  db:
+    image: mariadb:10.6.4-focal
+    command: '--default-authentication-plugin=mysql_native_password'
+    volumes:
+      - ./back/volumes/mariadb:/var/lib/mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD in the root .env file}
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=${WORDPRESS_DB_PASSWORD:?Set WORDPRESS_DB_PASSWORD in the root .env file}
+  wordpress:
+    image: wordpress:latest
+    volumes:
+      - ./back/volumes/wordpress:/var/www/html
+    ports:
+      - 80:80
+    restart: always
+    environment:
+      - WORDPRESS_DB_HOST=db
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD:?Set WORDPRESS_DB_PASSWORD in the root .env file}
+      - WORDPRESS_DB_NAME=wordpress
+  cache:
+    image: redis:7.4-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - ./back/volumes/redis:/data
+  nextjs:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+      args:
+        - WORDPRESS_URL=http://wordpress:80
+    env_file:
+      - ./front/.env
+    ports:
+      - 81:8080
+    environment:
+      - WORDPRESS_URL=http://wordpress:80
+      - WORDPRESS_GRAPHQL_URL=
+      - WORDPRESS_CATEGORY_PROJECTS_ID=3
+      - WORDPRESS_CATEGORY_BLOG_ID=4
+      - MAX_ARTICLES_PROJECTS=3
+      - MAX_ARTICLES_BLOG=3
+      - WORDPRESS_REVALIDATE_SECONDS=300
+    depends_on:
+      - wordpress

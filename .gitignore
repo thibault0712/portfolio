@@ -1,7 +1,12 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+/.npm/
+/.pnpm-store/
+/.yarn/
+/.yarn-cache/
+/node_modules/
+front/node_modules
 /.pnp
 .pnp.*
 .yarn/*
@@ -15,6 +20,8 @@
 
 # next.js
 /.next/
+/front/.next/
+/front/.turbo/
 /out/
 
 # production
@@ -30,8 +37,13 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# Local environment files; keep examples versioned.
 .env*
+!.env.example
+!**/.env.example
+
+# Local Docker data (WordPress files, MariaDB database, and old Redis data)
+/back/volumes/
 
 # vercel
 .vercel

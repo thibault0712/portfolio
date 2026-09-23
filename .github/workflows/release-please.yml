@@ -1,0 +1,84 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  packages: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for the 1.0.0 baseline release
+        id: bootstrap
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: releases } = await github.rest.repos.listReleases({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 100,
+            });
+            const baselineExists = releases.some((release) => release.tag_name === "v1.0.0");
+            core.setOutput("ready", String(baselineExists));
+            if (!baselineExists) {
+              await core.summary
+                .addText("Automated releases will start after the published v1.0.0 baseline exists.")
+                .write();
+            }
+
+      - name: Create or update release pull request
+        if: ${{ steps.bootstrap.outputs.ready == 'true' }}
+        id: release
+        uses: googleapis/release-please-action@v4
+        with:
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+
+      - name: Check out released version
+        if: ${{ steps.bootstrap.outputs.ready == 'true' && steps.release.outputs['front--release_created'] == 'true' }}
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.release.outputs['front--tag_name'] }}
+
+      - name: Set up Docker Buildx
+        if: ${{ steps.bootstrap.outputs.ready == 'true' && steps.release.outputs['front--release_created'] == 'true' }}
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        if: ${{ steps.bootstrap.outputs.ready == 'true' && steps.release.outputs['front--release_created'] == 'true' }}
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract release image metadata
+        if: ${{ steps.bootstrap.outputs.ready == 'true' && steps.release.outputs['front--release_created'] == 'true' }}
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=raw,value=latest
+            type=raw,value=${{ steps.release.outputs['front--version'] }}
+            type=raw,value=${{ steps.release.outputs['front--tag_name'] }}
+            type=sha
+
+      - name: Build and publish release image
+        if: ${{ steps.bootstrap.outputs.ready == 'true' && steps.release.outputs['front--release_created'] == 'true' }}
+        uses: docker/build-push-action@v6
+        with:
+          context: ./front
+          file: ./front/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
