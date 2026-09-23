@@ -28,9 +28,7 @@ jobs:
             const baselineExists = releases.some((release) => release.tag_name === "v1.0.0");
             core.setOutput("ready", String(baselineExists));
             if (!baselineExists) {
-              await core.summary
-                .addText("Automated releases will start after the published v1.0.0 baseline exists.")
-                .write();
+              core.info("Automated releases will start after the published v1.0.0 baseline exists.");
             }
 
       - name: Create or update release pull request
