@@ -1,11 +1,16 @@
 {
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "release-type": "simple",
+  "extra-files": [
+    {
+      "type": "json",
+      "path": "front/package.json",
+      "jsonpath": "$.version"
+    }
+  ],
   "packages": {
-    "front": {
-      "release-type": "node",
-      "package-name": "portfolio",
-      "component": "portfolio",
-      "changelog-path": "../CHANGELOG.md"
+    ".": {
+      "package-name": "portfolio"
     }
   },
   "include-component-in-tag": false,
