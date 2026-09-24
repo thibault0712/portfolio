@@ -215,7 +215,7 @@ export async function fetchWordPressFilteredPosts(
             console.warn("WordPress indisponible pendant le build:", error);
             return EMPTY_POSTS;
         }
-        throw createAppError("Impossible de joindre le service de contenu.", 503);
+        throw createAppError("Impossible de joindre le service de contenu: " + WORDPRESS_GRAPHQL_URL, 503);
     }
 
     if (!response.ok) {

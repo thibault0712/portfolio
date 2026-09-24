@@ -94,7 +94,7 @@ async function fetchWordPressPost(slug: string): Promise<WordPressPost | null> {
             return null;
         }
 
-        throw createAppError("Impossible de joindre le service de contenu.", 503);
+        throw createAppError("Impossible de joindre le service de contenu: " + WORDPRESS_GRAPHQL_URL, 503);
     }
 
         if (!response.ok) {
