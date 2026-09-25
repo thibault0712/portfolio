@@ -197,12 +197,15 @@ export default function WordPressPostFilters({
 
                     {/* Tag selector (conditional) */}
                     {showTagFilter && (
-                        <div className="w-full sm:w-48">
+                        <div className="w-full sm:w-48 space-y-1.5">
+                            <label className="block text-sm font-heading" htmlFor="filter-tag">
+                                Tags
+                            </label>
                             <Select
                                 value={selectedTag}
                                 onValueChange={(val) => onTagChange(val)}
                             >
-                                <SelectTrigger className="w-full bg-secondary-background text-foreground h-10">
+                                <SelectTrigger id="filter-tag" className="w-full bg-secondary-background text-foreground h-10">
                                     <SelectValue placeholder="Tag" />
                                 </SelectTrigger>
                                 <SelectContent>
