@@ -6,10 +6,13 @@ import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 import TagsList from "@/src/ui/components/molecules/TagsList";
 import IllustrationMediaCard from "@/src/ui/components/atoms/custom/IllustrationMediaCard";
 import { getWordPressPostCoverMedia } from "@/src/lib/wordpress";
+import { format, parseISO } from "date-fns";
 
 type WordPressContentSectionProps = {
     post: WordPressPost;
 };
+
+const formatDisplayDate = (date: string) => format(parseISO(date), "dd/MM/yyyy");
 
 const WordPressPostContentSection = ({ post }: WordPressContentSectionProps) => {
     const presentationMedia = getWordPressPostCoverMedia(post);
@@ -47,8 +50,8 @@ const WordPressPostContentSection = ({ post }: WordPressContentSectionProps) => 
 
             {isPersonalProject && (
                 <div className="space-y-4">
-                    {post.personalProject?.startedAt && <p><span className="font-bold">Débuté le :</span> {new Date(post.personalProject.startedAt).toLocaleDateString()}</p>}
-                    {post.personalProject?.endedAt && <p><span className="font-bold">Arrêté le :</span> {new Date(post.personalProject.endedAt).toLocaleDateString()}</p>}
+                    {post.personalProject?.startedAt && <p><span className="font-bold">Débuté le :</span> {formatDisplayDate(post.personalProject.startedAt)}</p>}
+                    {post.personalProject?.endedAt && <p><span className="font-bold">Arrêté le :</span> {formatDisplayDate(post.personalProject.endedAt)}</p>}
                     <TagsList
                         tags={post.tags.nodes.map((tag) => tag.name)}
                         showTagsText={true}
@@ -59,8 +62,8 @@ const WordPressPostContentSection = ({ post }: WordPressContentSectionProps) => 
             {
                 !isPersonalProject && (
                     <div className="space-y-4">
-                        {post.date && <p><span className="font-bold">Publié le :</span> {new Date(post.date).toLocaleDateString("fr-FR")}</p>}
-                        {post.modified && <p><span className="font-bold">Dernière modification :</span> {new Date(post.modified).toLocaleDateString("fr-FR")}</p>}
+                        {post.date && <p><span className="font-bold">Publié le :</span> {formatDisplayDate(post.date)}</p>}
+                        {post.modified && <p><span className="font-bold">Dernière modification :</span> {formatDisplayDate(post.modified)}</p>}
                         {post.author?.node?.name && <p><span className="font-bold">Auteur :</span> {post.author.node.name}</p>}
                         <TagsList
                             tags={post.tags.nodes.map((tag) => tag.name)}
