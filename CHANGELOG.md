@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/thibault0712/portfolio/compare/v1.1.0...v1.1.1) (2026-09-25)
+
+
+### Bug Fixes
+
+* wrong date formatting in WordPressPostContentSection ([a7b08c1](https://github.com/thibault0712/portfolio/commit/a7b08c106769f4d0f28b83bd1d73a83fed186289))
+
 ## [1.1.0](https://github.com/thibault0712/portfolio/compare/v1.0.0...v1.1.0) (2026-09-25)
 
 
