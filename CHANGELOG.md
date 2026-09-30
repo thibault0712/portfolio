@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/thibault0712/portfolio/compare/v1.1.1...v1.2.0) (2026-09-30)
+
+
+### Features
+
+* Implement school project categories inside projects section ([fb4ee48](https://github.com/thibault0712/portfolio/commit/fb4ee48cf3cae56b7f43ede416a4e560fff07172))
+
+
+### Bug Fixes
+
+* Image optimization and remove unused graphql requests ([b037bf7](https://github.com/thibault0712/portfolio/commit/b037bf74fab60cb3cfcb37e3e061987eb98d0040))
+* School project categories don't show and wrong url structure ([1bdab9b](https://github.com/thibault0712/portfolio/commit/1bdab9b3318feb3eca505a203a1d2ef802c95673))
+
 ## [1.1.1](https://github.com/thibault0712/portfolio/compare/v1.1.0...v1.1.1) (2026-09-25)
 
 
