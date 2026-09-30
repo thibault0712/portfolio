@@ -2,22 +2,22 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SITE_URL } from "@/src/config/site";
 import { WORDPRESS_CATEGORY_PROJECTS_ID } from "@/src/config/wordpress";
-import { fetchWordPressPostsPage } from "@/src/api/fetch/fetchWordPressPosts";
+import { fetchWordPressChildCategories, fetchWordPressPostsPage } from "@/src/api/fetch/fetchWordPressPosts";
 import WordPressSectionScreen from "@/src/ui/screens/WordPressSectionScreen";
 
 export const metadata: Metadata = {
     title: "Mes projets",
     description: "Découvrez mes projets personnels et scolaires.",
     alternates: {
-        canonical: `${SITE_URL}/personalProjects`,
+        canonical: `${SITE_URL}/projects`,
     },
 };
 
 export default async function Page() {
-    const result = await fetchWordPressPostsPage({
-        categoryId: WORDPRESS_CATEGORY_PROJECTS_ID,
-        first: 25,
-    });
+    const [result, categories] = await Promise.all([
+        fetchWordPressPostsPage({ categoryId: WORDPRESS_CATEGORY_PROJECTS_ID, first: 25 }),
+        fetchWordPressChildCategories(WORDPRESS_CATEGORY_PROJECTS_ID),
+    ]);
 
     if (!result.nodes.length) {
         notFound();
@@ -26,8 +26,9 @@ export default async function Page() {
     return (
         <WordPressSectionScreen
             badgeLabel="Projet"
-            basePath="/personalProjects"
+            basePath="/projects"
             categoryId={WORDPRESS_CATEGORY_PROJECTS_ID}
+            categories={categories}
             navTitle="Mes projets"
             pageInfo={result.pageInfo}
             posts={result.nodes}

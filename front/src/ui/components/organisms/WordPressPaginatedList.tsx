@@ -11,6 +11,7 @@ import WordPressPostFilters, {
 import {
     type WordPressPost,
     type WordPressPostConnectionPageInfo,
+    type WordPressCategory,
 } from "@/src/models/WordPressPost";
 import {
     getWordPressPostCoverMedia,
@@ -28,6 +29,7 @@ type WordPressPaginatedListProps = {
     initialPosts: WordPressPost[];
     initialPageInfo?: WordPressPostConnectionPageInfo;
     title: string;
+    categories?: WordPressCategory[];
 };
 
 function formatDateToParam(date: Date | undefined): string | undefined {
@@ -55,6 +57,7 @@ export default function WordPressPaginatedList({
     initialPosts,
     initialPageInfo = { endCursor: null, hasNextPage: false },
     title,
+    categories = [],
 }: WordPressPaginatedListProps) {
     const isArticle = badgeLabel.toLowerCase().includes("article");
 
@@ -97,7 +100,10 @@ export default function WordPressPaginatedList({
 
     // Keep track of all known categories across accumulated posts
     const allCategories: FilterOption[] = React.useMemo(() => {
-        const catMap = new Map<string, string>();
+        if (basePath === "/projects") {
+            return categories.map(({ slug, name }) => ({ slug, name }));
+        }
+        const catMap = new Map<string, string>(categories.map((cat) => [cat.slug, cat.name]));
         for (const post of posts) {
             for (const cat of post.categories?.nodes || []) {
                 // The projects page queries the parent `projets` category so
@@ -112,7 +118,7 @@ export default function WordPressPaginatedList({
             slug,
             name,
         }));
-    }, [posts]);
+    }, [posts, categories, basePath]);
 
     // Available tags scoped to the selected category
     const availableTags: FilterOption[] = React.useMemo(() => {
@@ -437,17 +443,17 @@ export default function WordPressPaginatedList({
                                 href={
                                     basePath === "/articles"
                                         ? `${basePath}/${post.slug}`
-                                        : `/personalProjects/${post.slug}`
+                                        : `${basePath}/${post.slug}`
                                 }
                                 media={getWordPressPostCoverMedia(post)}
                                 title={post.title}
                                 githubUrl={
-                                    basePath === "/personalProjects"
+                                    basePath === "/projects"
                                         ? post.personalProject?.github
                                         : null
                                 }
                                 demoUrl={
-                                    basePath === "/personalProjects"
+                                    basePath === "/projects"
                                         ? post.personalProject?.demonstrationWebsite
                                         : null
                                 }

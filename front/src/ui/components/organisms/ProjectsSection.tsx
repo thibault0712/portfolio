@@ -31,7 +31,7 @@ const ProjectsSection = async () => {
                         <PostCard title={project.title}
                             description={getWordPressPostDescription(project)}
                             key={project.slug}
-                            href={`/personalProjects/${project.slug}`}
+                            href={`/projects/${project.slug}`}
                             badgeLabel={getWordPressPostProjectType(project)}
                             media={getWordPressPostCoverMedia(project)}
                             githubUrl={project.personalProject?.github}
@@ -43,7 +43,7 @@ const ProjectsSection = async () => {
 
             {projects.hasMore && (
                 <div className="w-full text-center">
-                    <Link href="/personalProjects">
+                    <Link href="/projects">
                         <Button size={"lg"} className="cursor-pointer text-base">Voir plus</Button>
                     </Link>
                 </div>

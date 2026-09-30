@@ -17,7 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.9,
         },
         {
-            url: `${SITE_URL}/personalProjects`,
+            url: `${SITE_URL}/projects`,
             lastModified: new Date(),
             priority: 0.9,
         },
@@ -42,7 +42,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         : null;
 
     const projectRoutes = projects?.nodes.map((project) => ({
-        url: `${SITE_URL}/personalProjects/${project.slug}`,
+        url: `${SITE_URL}/projects/${project.slug}`,
         lastModified: project.modified ? new Date(project.modified) : new Date(),
         priority: 0.8,
         images: getWordPressPostCoverUrl(project) ? [getWordPressPostCoverUrl(project)!] : [],

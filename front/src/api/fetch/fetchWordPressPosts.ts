@@ -7,6 +7,7 @@ import {
     WORDPRESS_REVALIDATE_SECONDS,
 } from "@/src/config/wordpress";
 import {
+    type WordPressCategory,
     type WordPressPostConnection,
     type WordPressPostListResult,
 } from "@/src/models/WordPressPost";
@@ -29,6 +30,27 @@ export type WordPressPostsFilterParams = {
     dateTo?: string | null; // YYYY-MM-DD
     sortBy?: "date-desc" | "date-asc" | "title-asc" | "title-desc";
 };
+
+export async function fetchWordPressChildCategories(parentId: number): Promise<WordPressCategory[]> {
+    const query = /* GraphQL */ `
+        query ProjectCategories($parentId: Int) {
+            categories(where: { parent: $parentId }, first: 100) {
+                nodes { databaseId name slug }
+            }
+        }
+    `;
+
+    const response = await fetch(WORDPRESS_GRAPHQL_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query, variables: { parentId } }),
+        next: { revalidate: WORDPRESS_REVALIDATE_SECONDS },
+    });
+    if (!response.ok) throw createAppError(`WordPress a répondu avec le statut ${response.status}.`);
+    const result = await response.json() as WordPressFetchResponse<{ categories?: { nodes?: WordPressCategory[] } }>;
+    if (result.errors?.length) throw createAppError(result.errors.map(({ message }) => message).join(" "));
+    return result.data?.categories?.nodes ?? [];
+}
 
 const WORDPRESS_POSTS_QUERY = /* GraphQL */ `
     query WordPressPosts($first: Int!, $after: String, $where: RootQueryToPostConnectionWhereArgs) {

@@ -7,10 +7,10 @@ import { getWordPressPostSeoDescription, getWordPressPostSeoTitle } from "@/src/
 import { getWordPressPostCoverUrl } from "@/src/lib/wordpress";
 
 export async function generateMetadata(
-    { params }: { params: Promise<{ personalProjectId: string }> }
+    { params }: { params: Promise<{ slug: string }> }
 ): Promise<Metadata> {
-    const { personalProjectId } = await params;
-    const projectInfo = await fetchWordPressPost(personalProjectId);
+    const { slug } = await params;
+    const projectInfo = await fetchWordPressPost(slug);
 
     if (!projectInfo) {
         return {
@@ -23,12 +23,12 @@ export async function generateMetadata(
         title: getWordPressPostSeoTitle(projectInfo),
         description: getWordPressPostSeoDescription(projectInfo).slice(0, 150),
         alternates: {
-            canonical: `${SITE_URL}/personalProjects/${personalProjectId}`,
+            canonical: `${SITE_URL}/projects/${slug}`,
         },
         openGraph: {
             title: getWordPressPostSeoTitle(projectInfo),
             description: getWordPressPostSeoDescription(projectInfo),
-            url: `${SITE_URL}/personalProjects/${personalProjectId}`,
+            url: `${SITE_URL}/projects/${slug}`,
             type: "article",
             siteName: "Falézan Thibault",
             images: getWordPressPostCoverUrl(projectInfo)
@@ -50,14 +50,14 @@ export async function generateMetadata(
     };
 }
 
-export default async function Page({ params }: { params: Promise<{ personalProjectId: string }> }) {
-    const { personalProjectId } = await params;
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params;
 
-    const projectInfo = await fetchWordPressPost(personalProjectId);
+    const projectInfo = await fetchWordPressPost(slug);
 
     if (!projectInfo) {
         notFound();
     }
 
-    return <WordPressPostScreen navTitle="Mes projets" navLink="/personalProjects" post={projectInfo} />;
+    return <WordPressPostScreen navTitle="Mes projets" navLink="/projects" post={projectInfo} />;
 }

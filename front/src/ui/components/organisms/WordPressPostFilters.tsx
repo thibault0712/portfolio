@@ -175,12 +175,15 @@ export default function WordPressPostFilters({
                 <div className="flex flex-wrap items-center gap-3 pt-1">
                     {/* Category selector (conditional) */}
                     {showCategoryFilter && (
-                        <div className="w-full sm:w-48">
+                        <div className="w-full sm:w-48 space-y-1.5">
+                            <label className="block text-sm font-heading" htmlFor="filter-category">
+                                Catégories
+                            </label>
                             <Select
                                 value={selectedCategory}
                                 onValueChange={(val) => onCategoryChange(val)}
                             >
-                                <SelectTrigger className="w-full bg-secondary-background text-foreground h-10">
+                                <SelectTrigger id="filter-category" className="w-full bg-secondary-background text-foreground h-10">
                                     <SelectValue placeholder="Catégorie" />
                                 </SelectTrigger>
                                 <SelectContent>
