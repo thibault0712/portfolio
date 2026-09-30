@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.1](https://github.com/thibault0712/portfolio/compare/v1.2.0...v1.2.1) (2026-09-30)
+
+
+### Bug Fixes
+
+* Wrong tags, categories and author filters positions ([5658e34](https://github.com/thibault0712/portfolio/commit/5658e3438a42d3193b4137488457da23d2702ebd))
+* Wrong tags, categories and author filters positions ([bfc6f53](https://github.com/thibault0712/portfolio/commit/bfc6f53c48832ca9310a756de39c5f549ede09b6))
+
 ## [1.2.0](https://github.com/thibault0712/portfolio/compare/v1.1.1...v1.2.0) (2026-09-30)
 
 
