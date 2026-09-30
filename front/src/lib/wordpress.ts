@@ -37,6 +37,10 @@ export function getWordPressPostDescription(post: WordPressPost) {
         || stripHtml(post.content);
 }
 
+export function getWordPressPostProjectType(post: WordPressPost) {
+    return post.categories?.nodes?.find((category) => category.slug !== "projets")?.name ?? "Projet";
+}
+
 export function getWordPressPostSeoTitle(post: WordPressPost) {
     return post.seo?.title || stripHtml(post.title);
 }

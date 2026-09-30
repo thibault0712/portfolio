@@ -6,8 +6,8 @@ import { fetchWordPressPostsPage } from "@/src/api/fetch/fetchWordPressPosts";
 import WordPressSectionScreen from "@/src/ui/screens/WordPressSectionScreen";
 
 export const metadata: Metadata = {
-    title: "Projets personnels",
-    description: "Découvrez mes projets personnels.",
+    title: "Mes projets",
+    description: "Découvrez mes projets personnels et scolaires.",
     alternates: {
         canonical: `${SITE_URL}/personalProjects`,
     },

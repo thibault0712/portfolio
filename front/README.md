@@ -38,7 +38,7 @@ Le `.env` à la racine configure MariaDB et WordPress dans Docker Compose. Celui
 
 - `WORDPRESS_URL` : URL du site WordPress local ou distant.
 - `WORDPRESS_GRAPHQL_URL` : endpoint GraphQL, dérivé automatiquement si vide.
-- `WORDPRESS_CATEGORY_PROJECTS_ID` : catégorie utilisée pour la section Projets personnels.
+- `WORDPRESS_CATEGORY_PROJECTS_ID` : catégorie parente `Projets`, qui regroupe les projets personnels et scolaires.
 - `WORDPRESS_CATEGORY_BLOG_ID` : catégorie utilisée pour la section Blog.
 - `MAX_ARTICLES_PROJECTS` : nombre maximal de cartes affichées sur l’accueil pour les projets.
 - `MAX_ARTICLES_BLOG` : nombre maximal de cartes affichées sur l’accueil pour le blog.
@@ -46,6 +46,6 @@ Le `.env` à la racine configure MariaDB et WordPress dans Docker Compose. Celui
 
 ## Notes
 
-- Le blog et les projets personnels sont rendus via WPGraphQL.
+- Le blog et les projets sont rendus via WPGraphQL. La catégorie parente `Projets` alimente les vues combinées et ses sous-catégories servent de filtres.
 - Le contenu WordPress est sanitizé avant affichage.
 - Les anciennes intégrations Appwrite ont été retirées du chemin de build.

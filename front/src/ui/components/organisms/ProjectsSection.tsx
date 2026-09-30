@@ -4,6 +4,7 @@ import PostCard from "@/src/ui/components/molecules/PostCard";
 import { MAX_ARTICLES_PROJECTS } from "@/src/config/wordpress";
 import { getWordPressPostDescription } from "@/src/lib/wordpress";
 import { getWordPressPostCoverMedia } from "@/src/lib/wordpress";
+import { getWordPressPostProjectType } from "@/src/lib/wordpress";
 import Link from "next/link";
 import { Button } from "@/src/ui/components/atoms/shadcnUI/button";
 
@@ -31,7 +32,7 @@ const ProjectsSection = async () => {
                             description={getWordPressPostDescription(project)}
                             key={project.slug}
                             href={`/personalProjects/${project.slug}`}
-                            badgeLabel={"Projet"}
+                            badgeLabel={getWordPressPostProjectType(project)}
                             media={getWordPressPostCoverMedia(project)}
                             githubUrl={project.personalProject?.github}
                             demoUrl={project.personalProject?.demonstrationWebsite}

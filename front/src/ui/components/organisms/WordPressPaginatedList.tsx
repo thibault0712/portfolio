@@ -15,6 +15,7 @@ import {
 import {
     getWordPressPostCoverMedia,
     getWordPressPostDescription,
+    getWordPressPostProjectType,
 } from "@/src/lib/wordpress";
 import { Button } from "@/src/ui/components/atoms/shadcnUI/button";
 import { RotateCcw, Loader2 } from "lucide-react";
@@ -99,7 +100,10 @@ export default function WordPressPaginatedList({
         const catMap = new Map<string, string>();
         for (const post of posts) {
             for (const cat of post.categories?.nodes || []) {
-                if (cat.slug && cat.name) {
+                // The projects page queries the parent `projets` category so
+                // that WordPress includes both child categories. Keep the
+                // selector focused on the two project types themselves.
+                if (cat.slug && cat.name && cat.slug !== "projets") {
                     catMap.set(cat.slug, cat.name);
                 }
             }
@@ -428,7 +432,7 @@ export default function WordPressPaginatedList({
                         {posts.map((post) => (
                             <PostCard
                                 key={post.slug}
-                                badgeLabel={badgeLabel}
+                                badgeLabel={isArticle ? badgeLabel : getWordPressPostProjectType(post)}
                                 description={getWordPressPostDescription(post)}
                                 href={
                                     basePath === "/articles"
