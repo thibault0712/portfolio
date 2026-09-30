@@ -172,7 +172,7 @@ export default function WordPressPostFilters({
                 </div>
 
                 {/* Filter controls row */}
-                <div className="flex flex-wrap items-center gap-3 pt-1">
+                <div className="flex flex-wrap items-start gap-3">
                     {/* Category selector (conditional) */}
                     {showCategoryFilter && (
                         <div className="w-full sm:w-48 space-y-1.5">
@@ -225,12 +225,15 @@ export default function WordPressPostFilters({
 
                     {/* Author selector (for articles) */}
                     {showAuthorFilter && onAuthorChange && (
-                        <div className="w-full sm:w-48">
+                        <div className="w-full sm:w-48 space-y-1.5">
+                            <label className="block text-sm font-heading" htmlFor="filter-author">
+                                Auteur
+                            </label>
                             <Select
                                 value={selectedAuthor}
                                 onValueChange={(val) => onAuthorChange(val)}
                             >
-                                <SelectTrigger className="w-full bg-secondary-background text-foreground h-10">
+                                <SelectTrigger id="filter-author" className="w-full bg-secondary-background text-foreground h-10">
                                     <SelectValue placeholder="Auteur" />
                                 </SelectTrigger>
                                 <SelectContent>
