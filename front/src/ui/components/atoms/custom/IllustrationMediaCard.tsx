@@ -24,7 +24,7 @@ const IllustrationMediaCard = (illustrationMediaCardProps: IllustrationMediaCard
                     <source src={presentationUrl} type={wordpressMediaItem.mimeType || undefined} />
                 </video>
                 ) : presentationUrl ? (
-                <Image unoptimized={true} width={250} height={200} className={"w-full rounded-xl max-h-50 sm:max-h-96 object-cover "} src={presentationUrl} alt={illustrationMediaCardProps.projectTitle}></Image>
+                <Image width={1200} height={800} className={"w-full rounded-xl max-h-50 sm:max-h-96 object-cover "} src={presentationUrl} alt={illustrationMediaCardProps.projectTitle}></Image>
             ) : null}
 
             <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px] flex items-center justify-center">

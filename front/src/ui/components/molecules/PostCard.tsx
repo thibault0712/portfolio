@@ -74,7 +74,6 @@ const PostCard = ({
                                 </video>
                             ) : (
                                 <Image
-                                    unoptimized={true}
                                     width={1200}
                                     height={800}
                                     className={"rounded-base w-full h-54 object-cover shadow-shadow border-2 border-black hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none"}

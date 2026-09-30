@@ -4,7 +4,7 @@ export type WordPressMediaItem = {
     mediaType: string | null;
     mimeType: string | null;
     sourceUrl: string | null;
-    title: string | null;
+    title?: string | null;
 };
 
 export type WordPressPresentationField = {
@@ -12,17 +12,17 @@ export type WordPressPresentationField = {
 } | null;
 
 export type WordPressArticleFields = {
-    description: string | null;
-    illustrationMedia: WordPressPresentationField;
+    description?: string | null;
+    illustrationMedia?: WordPressPresentationField;
 };
 
 export type WordPressPersonalProjectFields = {
-    startedAt: string | null;
-    description: string | null;
-    github: string | null;
-    demonstrationWebsite: string | null;
-    endedAt: string | null;
-    illustrationMedia: WordPressPresentationField;
+    startedAt?: string | null;
+    description?: string | null;
+    github?: string | null;
+    demonstrationWebsite?: string | null;
+    endedAt?: string | null;
+    illustrationMedia?: WordPressPresentationField;
 };
 
 export type WordPressSeoFields = {
@@ -31,13 +31,13 @@ export type WordPressSeoFields = {
 };
 
 export type WordPressCategory = {
-    databaseId: number;
+    databaseId?: number;
     name: string;
     slug: string;
 };
 
 export type WordPressTag = {
-    databaseId: number;
+    databaseId?: number;
     name: string;
     slug: string;
 };
@@ -48,23 +48,23 @@ export type WordPressAuthor = {
 };
 
 export type WordPressPost = {
-    article: WordPressArticleFields | null;
-    author: {
+    article?: WordPressArticleFields | null;
+    author?: {
         node: WordPressAuthor | null;
     } | null;
-    personalProject: WordPressPersonalProjectFields | null;
+    personalProject?: WordPressPersonalProjectFields | null;
     categories: {
         nodes: WordPressCategory[];
     };
-    content: string;
-    databaseId: number;
-    date: string | null;
-    excerpt: string;
+    content?: string | null;
+    databaseId?: number;
+    date?: string | null;
+    excerpt?: string | null;
     modified: string | null;
     tags: {
         nodes: WordPressTag[];
     };
-    seo: WordPressSeoFields | null;
+    seo?: WordPressSeoFields | null;
     slug: string;
     title: string;
 };

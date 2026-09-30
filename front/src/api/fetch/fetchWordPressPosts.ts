@@ -40,27 +40,51 @@ export async function fetchWordPressChildCategories(parentId: number): Promise<W
         }
     `;
 
-    const response = await fetch(WORDPRESS_GRAPHQL_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query, variables: { parentId } }),
-        next: { revalidate: WORDPRESS_REVALIDATE_SECONDS },
-    });
-    if (!response.ok) throw createAppError(`WordPress a répondu avec le statut ${response.status}.`);
+    let response: Response;
+
+    try {
+        response = await fetch(WORDPRESS_GRAPHQL_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ query, variables: { parentId } }),
+            next: { revalidate: WORDPRESS_REVALIDATE_SECONDS },
+        });
+    } catch (error) {
+        if (IS_BUILD) {
+            console.warn("WordPress indisponible pendant le build (catégories):", error);
+            return [];
+        }
+        throw createAppError("Impossible de récupérer les catégories WordPress.", 503);
+    }
+
+    if (!response.ok) {
+        if (IS_BUILD) {
+            console.warn(`WordPress a répondu avec le statut ${response.status} pendant le build (catégories).`);
+            return [];
+        }
+        throw createAppError(`WordPress a répondu avec le statut ${response.status}.`, response.status);
+    }
+
     const result = await response.json() as WordPressFetchResponse<{ categories?: { nodes?: WordPressCategory[] } }>;
-    if (result.errors?.length) throw createAppError(result.errors.map(({ message }) => message).join(" "));
+    if (result.errors?.length) {
+        if (IS_BUILD) {
+            console.warn("Erreur GraphQL WordPress pendant le build (catégories):", result.errors[0].message);
+            return [];
+        }
+        throw createAppError(result.errors.map(({ message }) => message).join(" "), 502);
+    }
     return result.data?.categories?.nodes ?? [];
 }
 
 const WORDPRESS_POSTS_QUERY = /* GraphQL */ `
-    query WordPressPosts($first: Int!, $after: String, $where: RootQueryToPostConnectionWhereArgs) {
+    query WordPressPosts($first: Int!, $after: String, $where: RootQueryToPostConnectionWhereArgs, $isProject: Boolean!) {
         posts(
             first: $first
             after: $after
             where: $where
         ) {
             nodes {
-                article {
+                article @skip(if: $isProject) {
                     description
                     illustrationMedia {
                         node {
@@ -69,22 +93,19 @@ const WORDPRESS_POSTS_QUERY = /* GraphQL */ `
                             mediaType
                             mimeType
                             sourceUrl
-                            title
                         }
                     }
                 }
-                author {
+                author @skip(if: $isProject) {
                     node {
                         name
                         slug
                     }
                 }
-                personalProject {
-                    startedAt
+                personalProject @include(if: $isProject) {
                     description
                     github
                     demonstrationWebsite
-                    endedAt
                     illustrationMedia {
                         node {
                             altText
@@ -92,32 +113,22 @@ const WORDPRESS_POSTS_QUERY = /* GraphQL */ `
                             mediaType
                             mimeType
                             sourceUrl
-                            title
                         }
                     }
                 }
                 categories {
                     nodes {
-                        databaseId
                         name
                         slug
                     }
                 }
-                content
-                databaseId
-                date
                 excerpt
                 modified
                 tags {
                     nodes {
-                        databaseId
                         name
                         slug
                     }
-                }
-                seo {
-                    metaDescription
-                    title
                 }
                 slug
                 title
@@ -226,7 +237,12 @@ export async function fetchWordPressFilteredPosts(
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 query: WORDPRESS_POSTS_QUERY,
-                variables: { first, after: after ?? null, where },
+                variables: {
+                    first,
+                    after: after ?? null,
+                    where,
+                    isProject: params.categoryId === WORDPRESS_CATEGORY_PROJECTS_ID,
+                },
             }),
             ...(forceRefresh
                 ? { cache: "no-store" }

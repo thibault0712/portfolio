@@ -73,7 +73,7 @@ const WordPressPostContentSection = ({ post }: WordPressContentSectionProps) => 
                 )
             }
 
-            <WordPressContent html={post.content} />
+            <WordPressContent html={post.content ?? ""} />
 
         </section>
     );
