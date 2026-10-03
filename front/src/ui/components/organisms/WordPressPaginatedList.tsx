@@ -167,7 +167,8 @@ export default function WordPressPaginatedList({
             selectedTag !== "all" &&
             !availableTags.some((t) => t.slug === selectedTag)
         ) {
-            setSelectedTag("all");
+            const timeout = window.setTimeout(() => setSelectedTag("all"), 0);
+            return () => window.clearTimeout(timeout);
         }
     }, [availableTags, selectedTag]);
 
