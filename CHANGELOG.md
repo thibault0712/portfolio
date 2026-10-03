@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.3.0](https://github.com/thibault0712/portfolio/compare/v1.2.1...v1.3.0) (2026-10-03)
+
+
+### Features
+
+* Add Dependabot configuration and workflows for dependency manag… ([75a3495](https://github.com/thibault0712/portfolio/commit/75a3495e073314b3ba402ceab8ff84e8cdefe25a))
+* Add Dependabot configuration and workflows for dependency management and automerge ([0f307da](https://github.com/thibault0712/portfolio/commit/0f307da63993b5701e695ea28e02f0de6c7687e0))
+
+
+### Bug Fixes
+
+* remove unnecessary displayName assignment in renderMap.tsx ([124b1b6](https://github.com/thibault0712/portfolio/commit/124b1b687e84386a67ff0edb08f0b193187267ba))
+* update docker-publish workflow to simplify pull_request handling and always push images ([c1bf6e9](https://github.com/thibault0712/portfolio/commit/c1bf6e9b2e3ff1dadd6f377de400b4c32ed09166))
+
 ## [1.2.1](https://github.com/thibault0712/portfolio/compare/v1.2.0...v1.2.1) (2026-09-30)
 
 
