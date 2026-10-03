@@ -24,9 +24,10 @@ const HEADING_SIZES: Record<string, string> = {
 };
 
 function heading(Tag: "h1" | "h2" | "h3" | "h4" | "h5" | "h6"): Renderer {
-    return (({ node, children }) => (
+    const Heading: Renderer = ({ node, children }) => (
         <Tag className={`${HEADING_CLASS} ${HEADING_SIZES[Tag]} ${getTextAlignClass(node)}`}>{children}</Tag>
-    ))
+    );
+    return Heading;
 }
 
 /** Blocs qui gèrent déjà leur propre mise en page : l'image doit alors remplir la cellule. */

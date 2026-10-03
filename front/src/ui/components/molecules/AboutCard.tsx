@@ -15,14 +15,14 @@ const AboutCard = () => {
                     <Title textLevel={"h2"} className="text-4xl font-heading">À propos de moi</Title>
                     <p className={"font-base text-justify"}>
                         Je m’appelle Thibault Falezan, je suis actuellement en troisième année de BUT Informatique à l’IUT de
-                        Vannes et en échange à Montréal à l'École de technologie supérieure en baccalauréat en génie logiciel.
+                        Vannes et en échange à Montréal à l&apos;École de technologie supérieure en baccalauréat en génie logiciel.
                         <br/>
                         <br/>
                         Passionné par l’informatique depuis plusieurs années, j’aime autant concevoir des projets techniques que
                         comprendre le fonctionnement en profondeur des systèmes que j’utilise. Mon alternance chez BIC et mes
-                        différents projets m'ont permis de développer mes compétences en développement front-end et back-end.                        <br/>
+                        différents projets m&apos;ont permis de développer mes compétences en développement front-end et back-end.                        <br/>
                         <br/>
-                        Grand passionné de badminton, je fais également partie de l'équipe de badminton Piranhas de l'ÉTS.
+                        Grand passionné de badminton, je fais également partie de l&apos;équipe de badminton Piranhas de l&apos;ÉTS.
                     </p>
                     <div className={"flex flex-wrap gap-4"}>
                         <SocialButton socialMedia={"Mail"}/>
