@@ -27,7 +27,6 @@ function heading(Tag: "h1" | "h2" | "h3" | "h4" | "h5" | "h6"): Renderer {
     const Heading: Renderer = ({ node, children }) => (
         <Tag className={`${HEADING_CLASS} ${HEADING_SIZES[Tag]} ${getTextAlignClass(node)}`}>{children}</Tag>
     );
-    Heading.displayName = `WordPress${Tag.toUpperCase()}`;
     return Heading;
 }
 
