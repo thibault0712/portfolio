@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.2](https://github.com/thibault0712/portfolio/compare/v1.3.1...v1.3.2) (2026-10-08)
+
+
+### Bug Fixes
+
+* inverted urls ([3677e35](https://github.com/thibault0712/portfolio/commit/3677e357186217b603248c27cb12b64d4e0a1a5d))
+
 ## [1.3.1](https://github.com/thibault0712/portfolio/compare/v1.3.0...v1.3.1) (2026-10-08)
 
 
