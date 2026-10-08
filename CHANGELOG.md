@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/thibault0712/portfolio/compare/v1.3.0...v1.3.1) (2026-10-08)
+
+
+### Features
+
+* Implement redirection for last backend url ([d710ed0](https://github.com/thibault0712/portfolio/commit/d710ed07310e9ed1759b031765d178ebe2125600))
+
 ## [1.3.0](https://github.com/thibault0712/portfolio/compare/v1.2.1...v1.3.0) (2026-10-03)
 
 
