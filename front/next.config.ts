@@ -3,14 +3,14 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
     async redirects() {
         return [
-            { source: "/personalProjects/revego", destination: "/projects/690215fc00092d42d096", permanent: true },
-            { source: "/personalProjects/novasuite", destination: "/projects/69020c5d0002b4d3341f", permanent: true },
-            { source: "/personalProjects/waystrone", destination: "/projects/6901d1fb0002505973bb", permanent: true },
-            { source: "/personalProjects/nazel-launcher", destination: "/projects/68ff743800223a113cee", permanent: true },
-            { source: "/projects/revego", destination: "/projects/690215fc00092d42d096", permanent: true },
-            { source: "/projects/novasuite", destination: "/projects/69020c5d0002b4d3341f", permanent: true },
-            { source: "/projects/waystrone", destination: "/projects/6901d1fb0002505973bb", permanent: true },
-            { source: "/projects/nazel-launcher", destination: "/projects/68ff743800223a113cee", permanent: true },
+            { source: "/personalProjects/690215fc00092d42d096", destination: "/projects/revego", permanent: true },
+            { source: "/personalProjects/69020c5d0002b4d3341f", destination: "/projects/novasuite", permanent: true },
+            { source: "/personalProjects/6901d1fb0002505973bb", destination: "/projects/waystrone", permanent: true },
+            { source: "/personalProjects/68ff743800223a113cee", destination: "/projects/nazel-launcher", permanent: true },
+            { source: "/projects/690215fc00092d42d096", destination: "/projects/revego", permanent: true },
+            { source: "/projects/69020c5d0002b4d3341f", destination: "/projects/novasuite", permanent: true },
+            { source: "/projects/6901d1fb0002505973bb", destination: "/projects/waystone", permanent: true },
+            { source: "/projects/68ff743800223a113cee", destination: "/projects/nazel-launcher", permanent: true },
             { source: "/personalProjects", destination: "/projects", permanent: true },
             { source: "/personalProjects/:slug", destination: "/projects/:slug", permanent: true },
         ];
